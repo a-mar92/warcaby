@@ -40,7 +40,7 @@ public class MoveUp implements Move {
         return Character.getNumericValue(poleUp.charAt(1)) - 1;
     }
 
-    //
+
 //
 //
 //

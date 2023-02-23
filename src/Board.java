@@ -76,10 +76,14 @@ public class Board {
     }
 
     public void changeValue() {
-   moveUp.moveDecision();
+        moveUp.moveDecision();
         moveDown.moveDecision();
+        if(moveUp.getWierszUp() -moveDown.getWierszDown() == -1 ||moveUp.getWierszUp() -moveDown.getWierszDown() == 1  ){
         board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
-        board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";
+        board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";}
+        else {
+            System.out.println( "błąd ");
+        }
         System.out.print("  A B C D E F G H");
         System.out.println();
         for (int i = 0; i < board.length; i++) {
@@ -93,7 +97,8 @@ public class Board {
     }
 
 
-}
+    }
+
 
 
 

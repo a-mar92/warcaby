@@ -1,7 +1,8 @@
 public class Board {
     MoveUp moveUp = new MoveUp();
     MoveDown moveDown = new MoveDown();
-
+    int pionkiW = 8;
+    int pionkiB = 8;
 
     static String[][] board = new String[8][8];
 
@@ -29,7 +30,7 @@ public class Board {
 
 
         for (int i = 0; i < 8; i++) {
-                        System.out.print(1+ i+ " ");
+            System.out.print(1 + i + " ");
             for (int j = 0; j < 8; j++) {
                 if (i == 0 || i == 2) {
                     if (j % 2 == 0 & i != 2) {
@@ -48,7 +49,7 @@ public class Board {
                         System.out.print(board[i][j] + " ");
                     }
                 } else if (i == 7) {
-                    if (j % 2 == 0) {
+                    if (j % 2 != 0) {
                         board[i][j] = "B";
                         System.out.print(board[i][j] + " ");
                     } else {
@@ -56,7 +57,7 @@ public class Board {
                         System.out.print(board[i][j] + " ");
                     }
                 } else if (i == 6) {
-                    if (j % 2 != 0) {
+                    if (j % 2 == 0) {
                         board[i][j] = "B";
                         System.out.print(board[i][j] + " ");
                     } else {
@@ -76,18 +77,17 @@ public class Board {
     }
 
     public void changeValue() {
-        while (moveUp.player ==1 || moveUp.player==2) {
+        while (moveUp.player == 1 || moveUp.player == 2) {
             if (moveUp.player == 1) {
                 System.out.println("Ruch gracz 1 ");
                 moveUp.moveDecision();
                 moveDown.moveDecision();
-                if (moveUp.getWierszUp() - moveDown.getWierszDown() == -1 || moveUp.getWierszUp() - moveDown.getWierszDown() == 1) {
-                    board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
-                    board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";
+                if (Math.abs(moveUp.getWierszUp() - moveDown.getWierszDown()) == 1 && Math.abs(moveUp.getKloumnaUp() - moveDown.getKolumnaDown()) == 1) {
+
+                        pionekRuch(1);
                 } else {
-                    System.out.println("błąd nie mażesz się ruszyć o tyle pól ");
-                    moveUp.moveDecision();
-                    moveDown.moveDecision();
+                    System.out.println("błąd ruchu ");
+                    changeValue();
                 }
 
 
@@ -107,11 +107,12 @@ public class Board {
                 System.out.println("ruch gracz 2");
                 moveUp.moveDecision();
                 moveDown.moveDecision();
-                if (moveUp.getWierszUp() - moveDown.getWierszDown() == -1 || moveUp.getWierszUp() - moveDown.getWierszDown() == 1) {
-                    board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
-                    board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "B";
+                if (Math.abs(moveUp.getWierszUp() - moveDown.getWierszDown()) == 1 && Math.abs(moveUp.getKloumnaUp() - moveDown.getKolumnaDown()) == 1) {
+                    pionekRuch(2);
+
                 } else {
-                    System.out.println("błąd nie mażesz się ruszyć o tyle pól");
+                    System.out.println("błąd ruchu ");
+                    changeValue();
                 }
                 moveUp.player--;
 
@@ -131,8 +132,36 @@ public class Board {
         }
     }
 
+    public void pionekRuch(int player) {
+        if (player == 2) {
+            if (board[moveDown.getWierszDown()][moveDown.getKolumnaDown()].equals("W")){
+                System.out.println("Zbiłeś pionka przeciwnika");
+                board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
+                board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "B";
+                pionkiW--;
+                System.out.println(pionkiW);
+            }else{
+            board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
+            board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "B";}
+
+        } else if (player == 1) {
+            if (board[moveDown.getWierszDown()][moveDown.getKolumnaDown()].equals("B")){
+                              System.out.println("Zbiłeś pionka przeciwnika");
+                              pionkiB--;
+
+                board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
+                board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";
+                System.out.println(pionkiW);
+            } else {
+            board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
+            board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";}
+
+        }
 
     }
+
+}
+
 
 
 

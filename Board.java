@@ -3,7 +3,7 @@ public class Board {
     MoveDown moveDown = new MoveDown();
     int pionkiW = 8;
     int pionkiB = 8;
-
+    boolean endgame = true;
     static String[][] board = new String[8][8];
 
     public void starterBoard() {
@@ -77,7 +77,7 @@ public class Board {
     }
 
     public void changeValue() {
-        while (moveUp.player == 1 || moveUp.player == 2) {
+        while ((moveUp.player == 1 || moveUp.player == 2)&&( endgame)) {
             if (moveUp.player == 1) {
                 System.out.println("Ruch gracz 1 ");
                 moveUp.moveDecision();
@@ -129,6 +129,14 @@ public class Board {
                 }
 
             }
+
+        if(pionkiW == 0 ){
+            System.out.println("Koniec gry, wygrywa B");
+            endgame = false;
+        } else if (pionkiB == 0) {
+            System.out.println("Koniec gry, wygrywa W");
+            endgame=false;
+        }
         }
     }
 
@@ -139,8 +147,16 @@ public class Board {
                 board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
                 board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "B";
                 pionkiW--;
-                System.out.println(pionkiW);
-            }else{
+
+
+            }
+            else if ((board[moveDown.getWierszDown()][moveDown.getKolumnaDown()].equals("B"))){
+                System.out.println("Tutuaj stoi twój pionek, zrób inny ruch");
+                changeValue();
+            }
+
+
+            else{
             board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
             board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "B";}
 
@@ -151,8 +167,12 @@ public class Board {
 
                 board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
                 board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";
-                System.out.println(pionkiW);
-            } else {
+
+            }
+            else if ((board[moveDown.getWierszDown()][moveDown.getKolumnaDown()].equals("W"))){
+                System.out.println("Tutuaj stoi twój pionek, zrób inny ruch");
+                changeValue();}
+            else {
             board[moveUp.getWierszUp()][moveUp.getKloumnaUp()] = "-";
             board[moveDown.getWierszDown()][moveDown.getKolumnaDown()] = "W";}
 

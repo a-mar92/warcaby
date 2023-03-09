@@ -1,61 +1,102 @@
+import java.util.Random;
 
 public class MoveUp implements Move {
     Board board;
     int player = 1;
+    int computer = 1;
     String poleUp;
-    int kloumna;int wiersz;
+  static   int kolunmaKomputer;
+  static   int wierszKomputer;
+        int computerNumberMove;
+    int kloumna;
+    int wiersz;
+
     public MoveUp(int kloumna, int wiersz) {
         this.kloumnaUp = kloumna;
         this.wierszUp = wiersz;
     }
-    public MoveUp(){};
+
+    public MoveUp() {
+    }
+
+    ;
 
     int kloumnaUp;
     int wierszUp;
 
-    public void moveDecision() {
+    public void moveDecisionPlayer() {
         System.out.println("Podaj pole pionka do przesunięcia : ");
         System.out.print(">");
         poleUp = scanner.nextLine();
         sprawdzZnak();
-
-
-
-
-
     }
 
-    public void executionMove() {
-        wiersz  = Character.getNumericValue(poleUp.charAt(0)) - 10;
+    public void moveDecisionComputer() {
+        computerNumberMove = 1;
+        executionMoveComputer();
+        sprawdzZnak();
+    }
+
+
+
+
+    public void executionMovePlayer() {
+        wiersz = Character.getNumericValue(poleUp.charAt(0)) - 10;
         kloumna = Character.getNumericValue(poleUp.charAt(1)) - 1;
-//        System.out.println("K "+ kloumna);
-//        System.out.println("W " +wiersz);
+    }
 
+    public void executionMoveComputer() {
+
+        computerNumberMove=1;
+        if (computerNumberMove == 1) {
+            wierszKomputer = 6;
+            kolunmaKomputer = random.nextInt(8);
+            if (kolunmaKomputer % 2 != 0) {
+                kolunmaKomputer = kolunmaKomputer + 1;
+            }
+
+
+        }
+        computerNumberMove++;
 
     }
 
-    public int getKloumnaUp() {
-        return Character.getNumericValue(poleUp.charAt(0)) - 10;
-    }
 
-    public int getWierszUp() {
-        return Character.getNumericValue(poleUp.charAt(1)) - 1;
-    }
+        public  int getKloumnaUp () {
+            return Character.getNumericValue(poleUp.charAt(0)) - 10;
+        }
 
-    public void sprawdzZnak(){
-        if(player==1 && Board.board[getWierszUp()][getKloumnaUp()].equals("W")){
-            executionMove();}
-        else if (player==2 && Board.board[getWierszUp()][getKloumnaUp()].equals("B")) {
-            executionMove();
+        public int getWierszUp () {
+            return Character.getNumericValue(poleUp.charAt(1)) - 1;
+        }
 
-        }else if (player==1 && Board.board[getWierszUp()][getKloumnaUp()].equals("-")||player==2 && Board.board[getWierszUp()][getKloumnaUp()].equals("-")) {
-            System.out.println("To nie jest pionek!");
-            moveDecision();}
+        public int getKolumnaKomp(){
+        return kolunmaKomputer;
 
-        else{
-            System.out.println("nie możesz ruszyć pionka od przeciwnika\n player1 - W\n player2 - B");
-            moveDecision();
-    }}
+        }
+
+        public int getWierszKomputer() {
+        return wierszKomputer;
+        }
+
+        public void sprawdzZnak () {
+            if (player == 1 && Board.board[getWierszUp()][getKloumnaUp()].equals("W")) {
+                executionMovePlayer();
+            } else if (player == 2 && Board.board[getWierszUp()][getKloumnaUp()].equals("B")) {
+                executionMovePlayer();
+
+            } else if (player == 1 && Board.board[getWierszUp()][getKloumnaUp()].equals("-") || player == 2 && Board.board[getWierszUp()][getKloumnaUp()].equals("-")) {
+                System.out.println("To nie jest pionek!");
+                moveDecisionPlayer();
+
+            }
+            else if (player == 3 && Board.board[getWierszUp()][getKloumnaUp()].equals("B")) {
+                executionMoveComputer();}
+            else {
+                System.out.println("nie możesz ruszyć pionka od przeciwnika");
+                moveDecisionPlayer();
+            }
+        }
 //
 //
 //

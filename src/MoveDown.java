@@ -1,69 +1,66 @@
 public class MoveDown implements Move {
 
-    public MoveDown(int kolumnaDown, int wierszDown) {
-        this.kolumnaDown = kolumnaDown;
-        this.wierszDown = wierszDown;
+    public MoveDown(int kolumnaDown, int rowDown) {
+        this.columnDown = kolumnaDown;
+        this.rowDown = rowDown;
     }
 
     public MoveDown() {
     }
-    int kolumnaDownKomputer;
-    int wierszDownKomputer;
-        int kolumnaDown;
-        int losowanieRuchu;
-     int wierszDown;
-    String poleDown;
 
-     public void moveDecisionPlayer(){
-         System.out.println();
-         System.out.println("Podaj pole gdzie umieścisz pionka : ");
-         System.out.print(">");
-         poleDown = scanner.nextLine();
-//         System.out.println("Umieściłeś pionka na polu " + poleDown);
-         executionMovePlayer();
-     }
+    int columnDownComputer;
+    int rowDownComputer;
+    int columnDown;
+    int randomMove;
+    int rowDown;
+    String fieldDown;
+
+    public void moveDecisionPlayer() {
+        System.out.println();
+        System.out.println("Give me a field of pawn : ");
+        System.out.print(">");
+        fieldDown = scanner.nextLine();
+        executionMovePlayer();
+    }
 
     @Override
     public void executionMovePlayer() {
-        int kolumnaDown = Character.getNumericValue(poleDown.charAt(0)) - 10;
-        int wierszDown = Character.getNumericValue(poleDown.charAt(1)) - 1;
-
-
+        int columnDown = Character.getNumericValue(fieldDown.charAt(0)) - 10;
+        int rowDown = Character.getNumericValue(fieldDown.charAt(1)) - 1;
 
 
     }
-    public void executionMoveKomputer(){
-        losowanieRuchu= random.nextInt(1);
 
-        if (losowanieRuchu==1 ||  MoveUp.wierszKomputer==0){
-            wierszDownKomputer =  MoveUp.wierszKomputer+1;
-            kolumnaDownKomputer = MoveUp.kolunmaKomputer+1;
+    public void executionMoveKomputer() {
+        randomMove = random.nextInt(1);
 
-        } else  {
-            wierszDownKomputer = MoveUp.wierszKomputer-1;
-        kolumnaDownKomputer = MoveUp.kolunmaKomputer+1;
+        if (randomMove == 1 || MoveUp.rowComputer == 0) {
+            rowDownComputer = MoveUp.rowComputer + 1;
+            columnDownComputer = MoveUp.columnComputer + 1;
 
-       }
-
-     }
-
-    public int getKolumnaDownKomputer(){
-         return kolumnaDownKomputer;
+        } else {
+            rowDownComputer = MoveUp.rowComputer - 1;
+            columnDownComputer = MoveUp.columnComputer + 1;
+        }
     }
 
-    public int getWierszDownKomputer() {
-        return wierszDownKomputer;
+    public int getColumnDownComputer() {
+        return columnDownComputer;
     }
 
-    public void setKolumnaDownKomputer(int kolumnaDownKomputer) {
-        this.kolumnaDownKomputer = kolumnaDownKomputer;
+    public int getRowDownComputer() {
+        return rowDownComputer;
     }
 
-    public int getKolumnaDown() {
-        return Character.getNumericValue(poleDown.charAt(0)) - 10;
+    public void setColumnDownComputer(int columnDownComputer) {
+        this.columnDownComputer = columnDownComputer;
     }
 
-    public int getWierszDown() {
-        return Character.getNumericValue(poleDown.charAt(1)) - 1;
+    public int getColumnDown() {
+        return Character.getNumericValue(fieldDown.charAt(0)) - 10;
+    }
+
+    public int getRowDown() {
+        return Character.getNumericValue(fieldDown.charAt(1)) - 1;
     }
 }

@@ -1,10 +1,11 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public interface Move {
     Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
+    void moveDecisionPlayer();
 
-    void moveDecision();
-
-    public void  executionMove();
+    public void executionMovePlayer();
 
 }
